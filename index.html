@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="all">
+    <link href="css/theme.css" rel="stylesheet" media="all">
+    <link href="css/signin.css" rel="stylesheet" media="all">
+    <title> login 사이트 </title>
+</head>
+
+<body>
+    <div id="wrapper" class="container theme-showcase">
+        <div id="top">
+            <div id="top.webtime&board">
+                <div id="servertime" class="form-signin-heading"><h3>서버 시간</h3></div>
+                <div id="webtime" class="form-signin-heading">서버 시간</div>
+                <script type="text/javascript">
+                    setInterval(function() {
+                            var time = new Date();
+                            var options = {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                second: "2-digit"
+                            };
+                            var div = document.getElementById('webtime');
+                            div.textContent = time.toLocaleTimeString("ko-kr", options);
+                            var text = "[" + div + "]";
+                    }, 1000);
+                </script>
+<!--
+                <div id="board">공지 사항 게시판
+                </div>
+-->
+            </div>
+        </div>
+        <div id="body" >
+            <div id="body.relimage&loginform">
+<!--
+                <div id="relimage">
+                관련 이미지 삽입
+                </div>
+-->
+                <div id="loginform">
+                    <form action="php/login.php" method="post" class="form-signin">
+                        <h2 class="form-signin-heading">수강신청</h2>
+                            <label for="id" class="sr-only">학 번</label>
+                            <input type="text" name="id" placeholder="학 번" class="form-control">
+                            <label for="pw" class="sr-only">비밀번호</label>
+                            <input type="password" name="pw" placeholder="비밀번호" class="form-control">
+                            <button type="submit" class="btn btn-lg btn-default btn-block" onclick="location.href='login.php'">
+                                로그인
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div id="bottom.links" >
+                <div id="link01" class="form-signin">
+                    <p>각종 링크들</p>
+                    <a href="html/signup.html">
+                        <button type="button" class="btn btn-xs btn-default">회원가입</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="css/bootstrap.min.css"></script>
+</body>
+
+</html>
