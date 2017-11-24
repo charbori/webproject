@@ -1,0 +1,37 @@
+<html>
+<head>
+     <meta charset="utf_8">
+</head>
+<body>
+    <form action="http://localhost/login.php" method="get">
+        <p>
+            <label for="id_txt">ID : </label>
+            <input id="id_txt" type="text" name="id" value="default value"> </p>
+        <p>
+            <label for="pwd_txt">PASSWORD : </label>
+            <input id="pwd_txt" type="password" name="pwd" value="default value"> </p>
+        <p>
+            <label for="address_txt">ADDRESS : </label>
+            <input id="address_txt" type="text" name="address" value="default value"> </p>
+        <p>
+            <label for="intro_txt">INTRODUCE :
+                <textarea id="intro_txt" cols="50" rows="2"> </textarea>
+            </label>
+        </p>
+        <select name="sex">
+            <option value="male">남성</option>
+            <option value="female">여성</option>
+        </select>
+        <p>
+            <label for="email_txt">E-MAIL</label>
+            <input id="email_txt" type="checkbox" name="text" value="default value"> </p>
+        <p>
+            <label for="email_txt">NON</label>
+            <input id="email_txt" type="checkbox" name="text" value="default value"> </p>
+        <input type="submit" value="회원가입">
+        <input type="button" value="취소" onclick="">
+        <!--        http://localhost/login.php?id=111&pwd=111&address=111 라는 문장이 전송된다.-->
+    </form>
+</body>
+
+</html>

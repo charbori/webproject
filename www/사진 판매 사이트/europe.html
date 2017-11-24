@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="style.css" rel="stylesheet" >
+	<title></title>
+</head>
+<body>
+<div class="wrap">
+	<div class="header">
+		<div id="logo"><img src="images/logo.png"></img></div>
+		<div id="title"><p id="home"><a href="index.html">여행지를 선택하세요</a></p></div>
+	</div>
+	<div class="space">
+		--
+	</div>
+	<div class="middle clearfix">
+		<div id="navi">
+			<ul id="group">
+			<h6>추천 여행지</h6> 
+				<li><a href="america.html">아메리카</a></li>
+				<li><a href="asia.html">아시아</a></li>
+				<li><a href="afreaca.html">아프리카</a></li>
+				<li><a href="ase.html">오세아니아</a></li>
+				<li><a href="europe.html">유럽</a></li>
+			</ul>	
+			<ul id="group">
+				<li class="logUp"><a href="idform2.html">회원가입</a></li>
+				<li class="logIn"><a href="logMenu.html">로그인</a></li>
+			</ul>	
+		</div>
+		<div class="main">
+			<h6>사진</h6>
+			<p><a href="europe.html"><img src="images/europe.png"><br>Europe</img></a></p>
+		</div>
+	</div>
+</div>
+		
+<div class="footer clearfix2">
+<div>
+	<div>
+		<table border=0 width=600 align=center>
+		<tr><td colspan=2 height=7 align=center><h1>Gallery</h1></td></tr>
+			<tr><td	colspan=2	align=right><font size=2>[<a href=gallery.php>갤러리메인</a>]</td></tr>
+		
+	<form method=post action=index.php enctype='multipart/form-data'>
+		
+		<tr><td width=100 align=right><font size=2>등록자명</font></td>
+			<td witdh=500><input type=text	name=wname	size=10	style='color:#000080;
+			background-color=ivory; border=1 solid blue; 	height:20px'></td></tr>
+		<tr><td align=right><font size=2>사진제목</font></td>
+			<td><input type=text	name=summary	size=70	style='color:#000080;
+			background-color=ivory; border=1 solid blue; height:20px'></td></tr>
+		<tr><td align=right><font size=2>사진파일</font></td>
+			<td><input type=file name='userfile' size=47	maxlength=80 style='color:#000080;
+			background-color=ivory; border=1 solid blue; height:20px'></td></tr>
+		<tr><td colspan=2></td></tr>
+		<tr align=center><td colspan=2><input type=submit	value='사진등록' style='color:#000080;
+		background-color=gray;	border=1 solid brown; height:20px'></tr></table>
+	</div>	
+</div>
+	
+</div>
+</div>
+</body>
+</html>
