@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>use calculator</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<p>please insert numbers this sample. ex) 12+12 </p>
+	<input type="text" id="input"><br>
+	<textarea id="output"></textarea><br>
+	<input type="button" onclick="inputVal();" value="계산">
+	<script>
+		var strInput;
+		//문서에서 입력할 값 추출
+		function inputVal(){
+			strInput = document.getElementById("input").value;
+			//console.log(strInput);
+			getStrAri(strInput);
+		}
+		//값에서 두 숫자값과 계산 형식 추출 
+		function getStrAri(strVal){
+			var intArrNum = [0,0];
+			var strVal = strInput;
+			var ariAt = strVal.search(/[^0-9]/);
+			var arithType = strVal.substring(ariAt,ariAt+1);
+			var strArrNum = strVal.split(/[^0-9]/);
+			console.log(strArrNum[0]);
+			console.log(strArrNum[1]);
+			intArrNum[0] = parseInt(strArrNum[0]);
+			intArrNum[1] = parseInt(strArrNum[1]);
+
+			console.log(arithType);
+			console.log(intArrNum[0]);
+			console.log(intArrNum[1]);
+
+			//계산 후 textarea에 저장
+			switch(arithType){
+				case "+":
+					document.getElementById("output").value = intArrNum[0] + intArrNum[1];
+					break;
+				case "-":
+					document.getElementById("output").value = intArrNum[0] - intArrNum[1];
+					break;
+				case "*":
+					document.getElementById("output").value = intArrNum[0] * intArrNum[1];
+					break;
+				case "/":
+					document.getElementById("output").value = intArrNum[0] / intArrNum[1];
+					break;			
+			}
+		}
+
+	</script>
+</body>
+</html>

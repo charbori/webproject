@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>계산할 숫자를 입력하세요</h1>
+	<br/>
+	<div>
+		<div>
+			<button id="1">1</button>
+			<button id="2">2</button>
+			<button id="3">3</button>
+		</div>
+		<div>
+			<button id="4">4</button>
+			<button id="5">5</button>
+			<button id="6">6</button>
+		</div>
+		<div>
+			<button id="7">7</button>
+			<button id="8">8</button>
+			<button id="9">9</button>
+		</div>
+		<div>
+			<input type="button" value="+" id="10">
+			<input type="button" value="-" id="11">
+			<input type="button" value="*" id="12">
+			<input type="button" value="/" id="13">
+		</div>
+	</div>
+	<br/>
+	<div>
+		<form action="calculator.php" id="fofo" method="post">
+			<div>전달될 내용:<br/>
+				<input type="text" name="text" id="msg" value="">	
+			</div>
+			<br/>
+			<div>
+				<input type="button" onclick="document.getElementById('fofo').submit();" value="전송">
+			</div>
+		</form>
+	</div>
+	<script>
+		var btnArr = new Array();
+		for(var i=0;i<13;i++){
+			btnArr[i] = document.getElementById(String(i+1));
+			btnArr[i].addEventListener("click",btnClick,false);
+		}
+
+		function btnClick(e){
+			if(parseInt(event.target.id)>=parseInt(10)){
+				document.getElementById('msg').value += event.target.value;
+			}else{
+				document.getElementById('msg').value += event.target.firstChild.nodeValue;
+			}
+		}
+
+	</script>
+</body>
+</html>

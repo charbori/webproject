@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Untitled</title>
+    <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+</head>
+<body>
+ <div id="main" style="width: 600px; height:400px;"></div>
+
+<style>
+    #main{
+        width:400px;
+        margin:10px auto;
+        padding: 20px;
+        border: 4px solid tomato;
+    }
+    @media(max-width:480px){
+        #main{
+            width:auto;
+        }
+    }
+    
+</style>
+
+ <script type="text/javascript">
+     var myChart = echarts.init(document.getElementById('main'));
+     var option = {
+        title:{
+            text:'음식점',
+            subtext: '가격과 품질'
+        },
+        tooltip:{
+            trigger:'axis',
+            axisPointer:{
+                type: 'cross',
+                label:{
+                    backgroundColor:'#283b56'
+                }
+            }
+        },
+        legend:{
+            data:['중식','일식']
+        },
+        toolbox:{
+            show: true,
+            feature:{
+                dataView: {readOnly:false},
+                restore:{},
+                saveAsImage:{}
+            }
+        },
+        dataZoom:{
+            show:false,
+            start:0,
+            end: 100
+        },
+        xAxis:[
+        {
+            type:'time',
+            splitNumber:10
+        }
+        ],
+        yAxis:[
+        {
+            type: 'value',
+            scale: true,
+            name:'선호도',
+            max:50,
+            //boundaryGap:[0.2,0.2],
+            min:0
+        }
+        ],
+        series:[
+        {
+            name:'중식',
+            type:'line',
+            data:(function(){
+                var melon = [];
+                var len=0;
+                while(len < 10){
+                    melon.push(Math.random()*50).toFixed(1);
+                    len++;
+                }
+                return melon;
+            })(),
+            data:(function(){
+                var d = [];
+                var len = 0;
+                var now = new Date();
+                var value;
+                while(len++ < 10){
+                    d.push([
+                        new Date(2015,9,1,0,len*10000),
+                        (Math.random()*30).toFixed(2)-0,
+                        (Math.random()*100).toFixed(2)-0
+                        ]);
+                }
+                return d;
+            })()
+        },
+        {
+            name:'일식',
+            type:'line',
+            data:(function(){
+                var res=[];
+                var len=0;
+                while(len < 10){
+                    res.push((Math.random()*50).toFixed(1));
+                    len++;
+                }
+                return res;
+            })(),
+            data:(function(){
+                var d = [];
+                var len = 0;
+                var now = new Date();
+                var value;
+                while(len++ < 10){
+                    d.push([
+                        new Date(2015,9,1,0,len*10000),
+                        (Math.random()*30).toFixed(2)-0,
+                        (Math.random()*100).toFixed(2)-0
+                        ]);
+                }
+                return d;
+            })()
+        }
+        ]
+    }
+
+    myChart.setOption(option);
+
+
+</script>
+</body>
+</html>

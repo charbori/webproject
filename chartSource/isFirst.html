@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta http-equiv="refresh" content="14400; URL=http://dev.farmplay.co.kr/vfarm/webapp/view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:98">
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script>
+
+var is_google = true
+
+var config = {
+apiKey: "AIzaSyCkXRBd_PuIgfa9R-S3YA-4aPMX5wt6ReQ",
+authDomain: "livino-b2b-farm.firebaseapp.com",
+databaseURL: "https://livino-b2b-farm.firebaseio.com",
+projectId: "livino-b2b-farm",
+storageBucket: "livino-b2b-farm.appspot.com",
+messagingSenderId: "943731348108"
+};
+//  firebase.initializeApp(config);
+
+var app = firebase.initializeApp(config);
+
+</script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.js"></script>
+
+  <!-- Styles -->
+<style>
+#chart_temp {
+  width: 100%;
+  height: 400px;
+}
+#chart_co2 {
+  width: 100%;
+  height: 400px;
+}
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="ko_KR.js"></script>
+
+<script>
+
+var is_google = true
+
+var config = {
+apiKey: "AIzaSyCkXRBd_PuIgfa9R-S3YA-4aPMX5wt6ReQ",
+authDomain: "livino-b2b-farm.firebaseapp.com",
+databaseURL: "https://livino-b2b-farm.firebaseio.com",
+projectId: "livino-b2b-farm",
+storageBucket: "livino-b2b-farm.appspot.com",
+messagingSenderId: "943731348108"
+};
+//  firebase.initializeApp(config);
+
+var app = firebase.initializeApp(config);
+
+</script>
+<style>
+body {margin:0;}
+
+.table.mobile {
+  display: none
+}
+
+.table.desktop {
+  display: inline
+}
+
+@media (max-width: 600px) {
+  .table.desktop {
+    display: none
+  }
+  .table.mobile {
+    display: inline
+  }
+}
+
+#t_chart { display: table; margin: 0; width: 100%; }
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 7px;
+  right: 10px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #20B7C7;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+.topbar {
+  overflow: hidden;
+  background-color: #0097A7;
+  color: #EEEEEE;
+  position: fixed;
+  padding: 5px 20px 0px 20px;
+  margin-right:0px;
+  margin-left:0px;
+  top: 0;
+  width:auto; left:0; right:0;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #0097A7;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #00BFD7;
+  text-align: center;
+  padding: 6pt 40pt;
+  text-decoration: none;
+  font-size: 10pt;
+}
+
+.navbar a:hover {
+  background: #f1f1f1;
+  color: #00BFD7;
+}
+
+.navbar a.active {
+  background-color: #00BCD4;
+  color: white;
+}
+
+.main {
+  padding: 16px;
+  margin-bottom: 30px;
+}
+.card {
+    box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+}
+.section { position: relative } 
+.section a { position: absolute; top: -80px }
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+table { border-collapse: collapse; margin-bottom: 5px; margin-left: 5px;}
+tr { border: none; }
+
+</style>
+<meta charset="utf-8">
+
+<body link="#808080" vlink="#808080" alink="#C0C0C0">
+<button onclick="topFunction()" id="myBtn" title="▲ 위로 이동">▲ 위로</button>
+<script>
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) 
+  {
+    document.getElementById("myBtn").style.display = "block";
+  } 
+  else 
+  {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+function topFunction() 
+{
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+function gauth_logout() 
+{
+	
+	app.auth().signOut().then(function() 
+	{
+		window.location.assign('index.php');
+	}).catch(function(error) 
+	{
+	});
+}
+
+function nauth_logout() 
+{
+	window.location.assign('index.php?gauth=false');
+}
+
+</script>
+
+<div class="main">
+<br><br><br>
+<div class="card">
+	  <div class="container">
+		<table width="100%" align="center">
+			<tr>
+			  <td align="left" style="word-break:break-all">
+			  <div align="right" style="padding-top: 4px"><font color="red"><b>물부족 : </b></font><select name="ew_list" onchange="location = this.value;"><option value="#"> 총 0개 </option></select>&nbsp;&nbsp;&nbsp;<br>통신두절 : <select name="ec_list" onchange="location = this.value;"><option value="#">====== 총 2개 ======</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=5C:CF:7F:5B:1F:34">lp_FARMPLAY_JEOK1</option><option value="#lp_FARMPLAY_JEOK1">lp_FARMPLAY_JEOK1</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:2D:E1">lp_FARMPLAY_SS_05</option><option value="#lp_FARMPLAY_SS_05">lp_FARMPLAY_SS_05</option></select>&nbsp;&nbsp;&nbsp;<br>장비 목록 : <select name="d_list" onchange="location = this.value;"><option value="#"> 총 18개 </option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=5C:CF:7F:5A:E8:11">lp_FARMPLAY_DEMO_00</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:A7">lp_FARMPLAY_DEMO_01</option><option selected value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:98">lp_FARMPLAY_DEMO_02</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:3B:96">lp_FARMPLAY_DS_00</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:2D:D8">lp_FARMPLAY_DS_01</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:37:ED">lp_FARMPLAY_DS_02</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:88:F3:35">lp_FARMPLAY_DS_03</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:36:45">lp_FARMPLAY_DS_04</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:33:6D">lp_FARMPLAY_DS_05</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=5C:CF:7F:5B:1F:34">lp_FARMPLAY_JEOK1</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=60:01:94:59:E6:F8">lp_FARMPLAY_RACK</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=5C:CF:7F:5A:E6:46">lp_FARMPLAY_RAEMIAN_1</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:2D:D3">lp_FARMPLAY_SS_01</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:3B:22">lp_FARMPLAY_SS_02</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:33:3F">lp_FARMPLAY_SS_04</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:2D:E1">lp_FARMPLAY_SS_05</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=5C:CF:7F:5A:E7:15">lp_FARMPLAY_STORE_MINI</option><option value="view_grp.php?gauth=true&em=binstar13@gmail.com&mac=5C:CF:7F:5B:3D:99">lp_ISEOULU_1</option></select>&nbsp;&nbsp;&nbsp;
+	         </div>
+			 </td>
+			</tr>
+		</table>
+	</div>
+</div>
+<br>
+<div class="section"></div>
+	<div class="card">
+		  <div class="container">
+    		<b><h3>[lp_FARMPLAY_DEMO_02]</h3></b>
+			<table id="t_chart" class="table table-responsive desktop" width="100%" align="center">
+				<tr>
+					<td width="40%"><div id="chart_temp1" onclick="window.open('view_grp_ex.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:98&ssid=lp_FARMPLAY_DEMO_02&type=0', '_blank', 'location=no,scrollbars=yes,status=no');"></div></td>
+					<td width="40%"><div id="chart_co21" onclick="window.open('view_grp_ex.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:98&ssid=lp_FARMPLAY_DEMO_02&type=1', '_blank', 'location=no,scrollbars=yes,status=no');"></div></td>
+				</tr>
+			</table>
+			<table class="table table-responsive mobile" width="100%" align="center">
+				<tr>
+					<td width="80%"><div id="chart_temp2" onclick="window.open('view_grp_ex.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:98&ssid=lp_FARMPLAY_DEMO_02&type=0', '_blank', 'location=no,scrollbars=yes,status=no');"></div></td>
+				</tr>
+				<tr>
+					<td width="80%"><div id="chart_co22" onclick="window.open('view_grp_ex.php?gauth=true&em=binstar13@gmail.com&mac=84:F3:EB:47:38:98&ssid=lp_FARMPLAY_DEMO_02&type=1', '_blank', 'location=no,scrollbars=yes,status=no');"></div></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</div>
+<br><br>
+<script>
+var g_btn_w = document.body.clientWidth;
+if(g_btn_w > 600)
+{
+	document.getElementById("chart_temp1").setAttribute("id", "chart_temp");
+	document.getElementById("chart_co21").setAttribute("id", "chart_co2");
+}
+else
+{
+	document.getElementById("chart_temp2").setAttribute("id", "chart_temp");
+	document.getElementById("chart_co22").setAttribute("id", "chart_co2");
+}
+
+</script>
+
+<!-- Chart code -->
+<script>
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+
+
+// Create chart
+var chart_temp = am4core.create("chart_temp", am4charts.XYChart);
+
+chart_temp.height=400;
+chart_temp.language.locale = am4lang_ko_KR;
+
+chart_temp.numberFormatter.language = new am4core.Language();
+chart_temp.numberFormatter.language.locale = am4lang_ko_KR;
+chart_temp.dateFormatter.language = new am4core.Language();
+chart_temp.dateFormatter.language.locale = am4lang_ko_KR;
+
+chart_temp.dateFormatter.dateFormat = "yyyy-MM-dd";
+
+//xAxis.dateFormatter = new am4core.DateFormatter();
+//xAxis.dateFormatter.dateFormat = "yyyy-MM-dd";
+
+chart_temp.paddingRight = 20;
+//chart_temp.creditsPosition = 'top-left';
+
+//chart_temp.data = generateChartData();
+
+chart_temp.data = [
+<!--#g_temp_data--> 
+{
+  "date":  Date.parse('2019-05-01 02:38:36'),//new Date(2019, 3, 12),
+  "value": 21,
+  "value2": 48
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 05:38:36'),//new Date(2019, 3, 12),
+  "value": 21,
+  "value2": 50
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 08:38:36'),//new Date(2019, 3, 12),
+  "value": 22,
+  "value2": 49
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 11:38:36'),//new Date(2019, 3, 12),
+  "value": 27,
+  "value2": 33
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 14:38:36'),//new Date(2019, 3, 12),
+  "value": 28,
+  "value2": 33
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 17:38:36'),//new Date(2019, 3, 12),
+  "value": 29,
+  "value2": 33
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 20:38:36'),//new Date(2019, 3, 12),
+  "value": 29,
+  "value2": 32
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 23:38:36'),//new Date(2019, 3, 12),
+  "value": 23,
+  "value2": 47
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 02:38:36'),//new Date(2019, 3, 12),
+  "value": 22,
+  "value2": 49
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 05:38:37'),//new Date(2019, 3, 12),
+  "value": 22,
+  "value2": 51
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 08:38:37'),//new Date(2019, 3, 12),
+  "value": 23,
+  "value2": 49
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 20:14:06'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 28
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 23:14:07'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 41
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 02:14:06'),//new Date(2019, 3, 12),
+  "value": 23,
+  "value2": 46
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 05:14:07'),//new Date(2019, 3, 12),
+  "value": 22,
+  "value2": 47
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 08:14:07'),//new Date(2019, 3, 12),
+  "value": 23,
+  "value2": 46
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 17:14:07'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 31
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 20:14:07'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 38
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 23:14:07'),//new Date(2019, 3, 12),
+  "value": 26,
+  "value2": 52
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 02:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 05:14:08'),//new Date(2019, 3, 12),
+  "value": 24,
+  "value2": 58
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 08:14:08'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 57
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 11:14:08'),//new Date(2019, 3, 12),
+  "value": 30,
+  "value2": 44
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 14:14:08'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 41
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 17:14:08'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 41
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 20:14:08'),//new Date(2019, 3, 12),
+  "value": 33,
+  "value2": 41
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 23:14:09'),//new Date(2019, 3, 12),
+  "value": 27,
+  "value2": 55
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 02:14:09'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 58
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 05:14:09'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 60
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 08:14:09'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 58
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 11:14:09'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 45
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 14:14:09'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 42
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 17:14:09'),//new Date(2019, 3, 12),
+  "value": 33,
+  "value2": 40
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 20:14:09'),//new Date(2019, 3, 12),
+  "value": 33,
+  "value2": 39
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 23:14:10'),//new Date(2019, 3, 12),
+  "value": 27,
+  "value2": 52
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 02:14:10'),//new Date(2019, 3, 12),
+  "value": 26,
+  "value2": 55
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 05:14:10'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 56
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 08:14:10'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 53
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 11:14:11'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 40
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 14:14:10'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 36
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 17:14:10'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 36
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 20:14:10'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 37
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 23:14:11'),//new Date(2019, 3, 12),
+  "value": 26,
+  "value2": 49
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 02:14:11'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 52
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 05:14:11'),//new Date(2019, 3, 12),
+  "value": 24,
+  "value2": 54
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 08:14:11'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 52
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 11:14:11'),//new Date(2019, 3, 12),
+  "value": 30,
+  "value2": 38
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 14:14:11'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 41
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 17:14:11'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 26
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 20:14:12'),//new Date(2019, 3, 12),
+  "value": 32,
+  "value2": 26
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 23:14:12'),//new Date(2019, 3, 12),
+  "value": 26,
+  "value2": 38
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 02:14:12'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 41
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 05:14:12'),//new Date(2019, 3, 12),
+  "value": 24,
+  "value2": 42
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 08:14:12'),//new Date(2019, 3, 12),
+  "value": 25,
+  "value2": 40
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 11:14:12'),//new Date(2019, 3, 12),
+  "value": 29,
+  "value2": 31
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 14:14:12'),//new Date(2019, 3, 12),
+  "value": 31,
+  "value2": 30
+},
+<!--g_temp_data#--> 
+];
+
+var dateAxis_temp = chart_temp.xAxes.push(new am4charts.DateAxis());
+dateAxis_temp.baseInterval = {
+  "timeUnit": "minute",
+  "count": 1
+};
+dateAxis_temp.dateFormats.setKey("day", "MMMM dt");
+dateAxis_temp.tooltipDateFormat = "yyyy-MM-dd HH:mm";
+
+
+//dateAxis_temp.tooltipText = "{dateX.formatDate('yyyy-MM-dd')}: {valueY.formatNumber('#.0')}";
+
+var valueAxis = chart_temp.yAxes.push(new am4charts.ValueAxis());
+valueAxis.tooltip.disabled = true;
+valueAxis.title.text = "온도 (°C)";
+//valueAxis.title.text = "온도";
+valueAxis.renderer.minGridDistance = 20; //
+
+var series_temp = chart_temp.series.push(new am4charts.LineSeries());
+series_temp.dataFields.dateX = "date";
+series_temp.dataFields.valueY = "value";
+series_temp.tooltipText = "온도: [bold]{valueY}°C[/]";
+//series_temp.tooltipText = "온도: [bold]{valueY}[/]";
+series_temp.fillOpacity = 0.3;
+series_temp.tensionX = 0.97;
+
+series_temp.stroke = am4core.color("red").lighten(0.5);
+series_temp.fill = am4core.color("red").lighten(0.5);
+
+//series_temp.stacked = true;
+
+var durationAxis = chart_temp.yAxes.push(new am4charts.ValueAxis());
+durationAxis.title.text = "습도 (%)";
+//durationAxis.baseUnit = "minute";
+durationAxis.renderer.grid.template.disabled = true;
+durationAxis.renderer.opposite = true;
+durationAxis.renderer.minGridDistance = 20;
+
+
+
+// static
+series_temp.legendSettings.labelText = "온도";
+
+var series_hum = chart_temp.series.push(new am4charts.LineSeries());
+series_hum.dataFields.dateX = "date";
+series_hum.dataFields.valueY = "value2";
+series_hum.yAxis = durationAxis;
+series_hum.tooltipText = "습도: [bold]{valueY}%[/]";
+//series_temp.tooltipText = "온도: [bold]{valueY}[/]";
+series_hum.fillOpacity = 0.3;
+series_hum.tensionX = 0.97;
+
+//series_hum.stacked = true;
+
+// static
+series_hum.legendSettings.labelText = "습도";
+
+
+var bullet = series_temp.bullets.push(new am4charts.CircleBullet());
+bullet.circle.fill = am4core.color("#fff");
+bullet.circle.strokeWidth = 1;
+
+bullet = series_hum.bullets.push(new am4charts.CircleBullet());
+bullet.circle.fill = am4core.color("#fff");
+bullet.circle.strokeWidth = 1;
+
+
+//series_temp.tooltipText = "{dateX.formatDate('yyyy-MM-dd')}: {valueY.formatNumber('#.0')}";
+
+//chart_temp.cursor = new am4charts.XYCursor();
+//chart_temp.cursor.lineY.opacity = 0;
+//chart_temp.scrollbarX = new am4charts.XYChartScrollbar();
+//chart_temp.scrollbarX.series.push(series_temp);
+
+// Add cursor
+chart_temp.cursor = new am4charts.XYCursor();
+chart_temp.cursor.xAxis = dateAxis_temp;
+chart_temp.scrollbarX = new am4core.Scrollbar();
+
+// add legend
+chart_temp.legend = new am4charts.Legend();
+
+
+chart_temp.events.on("datavalidated", function () {
+    dateAxis_temp.zoom({start:0.8, end:1});
+});
+
+chart_temp.events.on("ready", function () {
+//chart_temp.events.on("rendered", function () {
+  dateAxis_temp.zoomToDates(
+    Date.parse('2019-05-01 00:00:00'),
+    Date.parse('2019-05-07 15:53:38')
+  );
+});
+
+
+
+// Create chart
+var chart_co2 = am4core.create("chart_co2", am4charts.XYChart);
+
+chart_co2.height=400;
+chart_co2.language.locale = am4lang_ko_KR;
+
+chart_co2.numberFormatter.language = new am4core.Language();
+chart_co2.numberFormatter.language.locale = am4lang_ko_KR;
+chart_co2.dateFormatter.language = new am4core.Language();
+chart_co2.dateFormatter.language.locale = am4lang_ko_KR;
+
+chart_co2.dateFormatter.dateFormat = "yyyy-MM-dd";
+
+//xAxis.dateFormatter = new am4core.DateFormatter();
+//xAxis.dateFormatter.dateFormat = "yyyy-MM-dd";
+
+chart_co2.paddingRight = 20;
+//chart_co2.creditsPosition = 'top-left';
+
+//chart_co2.data = generateChartData();
+
+chart_co2.data = [
+<!--#g_co2_data--> 
+{
+  "date":  Date.parse('2019-05-01 02:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 05:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 08:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 11:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 14:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 17:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 20:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-01 23:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 02:38:36'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 05:38:37'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 08:38:37'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 20:14:06'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-02 23:14:07'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 02:14:06'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 05:14:07'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 08:14:07'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 17:14:07'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 20:14:07'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-03 23:14:07'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 02:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 05:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 08:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 11:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 14:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 17:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 20:14:08'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-04 23:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 02:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 05:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 08:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 11:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 14:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 17:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 20:14:09'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-05 23:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 02:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 05:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 08:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 11:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 14:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 17:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 20:14:10'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-06 23:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 02:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 05:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 08:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 11:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 14:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 17:14:11'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 20:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-07 23:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 02:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 05:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 08:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 11:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+ 
+{
+  "date":  Date.parse('2019-05-08 14:14:12'),//new Date(2019, 3, 12),
+  "value": 0,
+  "value2": 0
+},
+<!--g_co2_data#--> 
+];
+
+var dateAxis_co2 = chart_co2.xAxes.push(new am4charts.DateAxis());
+dateAxis_co2.baseInterval = {
+  "timeUnit": "minute",
+  "count": 1
+};
+dateAxis_co2.dateFormats.setKey("day", "MMMM dt");
+dateAxis_co2.tooltipDateFormat = "yyyy-MM-dd HH:mm";
+
+
+//dateAxis.tooltipText = "{dateX.formatDate('yyyy-MM-dd')}: {valueY.formatNumber('#.0')}";
+
+var valueAxis_co2 = chart_co2.yAxes.push(new am4charts.ValueAxis());
+valueAxis_co2.tooltip.disabled = true;
+valueAxis_co2.title.text = "CO₂ (ppm)";
+//valueAxis_co2.title.text = "온도";
+valueAxis_co2.renderer.minGridDistance = 20; //
+
+var durationAxis2 = chart_co2.yAxes.push(new am4charts.ValueAxis());
+durationAxis2.title.text = "VoCs (ppb)";
+//durationAxis.baseUnit = "minute";
+durationAxis2.renderer.grid.template.disabled = true;
+durationAxis2.renderer.opposite = true;
+durationAxis2.renderer.minGridDistance = 20;
+
+
+var series_co2 = chart_co2.series.push(new am4charts.LineSeries());
+series_co2.dataFields.dateX = "date";
+series_co2.dataFields.valueY = "value";
+series_co2.tooltipText = "CO₂: [bold]{valueY}ppm[/]";
+//series_hum.tooltipText = "온도: [bold]{valueY}[/]";
+series_co2.fillOpacity = 0.3;
+series_co2.tensionX = 0.97;
+
+series_co2.stroke = am4core.color("green").lighten(0.5);
+series_co2.fill = am4core.color("green").lighten(0.5);
+
+series_co2.legendSettings.labelText = "CO₂";
+
+var series_vocs = chart_co2.series.push(new am4charts.LineSeries());
+series_vocs.dataFields.dateX = "date";
+series_vocs.dataFields.valueY = "value2";
+series_vocs.yAxis = durationAxis2;
+series_vocs.tooltipText = "VoCs: [bold]{valueY}ppb[/]";
+//series_temp.tooltipText = "온도: [bold]{valueY}[/]";
+series_vocs.fillOpacity = 0.3;
+series_vocs.tensionX = 0.97;
+
+series_vocs.stroke = am4core.color("purple").lighten(0.5);
+series_vocs.fill = am4core.color("purple").lighten(0.5);
+
+
+//series_temp2.stacked = true;
+
+// static
+series_vocs.legendSettings.labelText = "VoCs";
+
+
+var bullet = series_co2.bullets.push(new am4charts.CircleBullet());
+bullet.circle.fill = am4core.color("#fff");
+bullet.circle.strokeWidth = 1;
+
+bullet = series_vocs.bullets.push(new am4charts.CircleBullet());
+bullet.circle.fill = am4core.color("#fff");
+bullet.circle.strokeWidth = 1;
+
+
+
+//series_co2.tooltipText = "{dateX.formatDate('yyyy-MM-dd')}: {valueY.formatNumber('#.0')}";
+
+//chart_co2.cursor = new am4charts.XYCursor();
+//chart_co2.cursor.lineY.opacity = 0;
+//chart_co2.scrollbarX = new am4charts.XYChartScrollbar();
+//chart_co2.scrollbarX.series.push(series_co2);
+
+// Add cursor
+chart_co2.cursor = new am4charts.XYCursor();
+chart_co2.cursor.xAxis = dateAxis_co2;
+chart_co2.scrollbarX = new am4core.Scrollbar();
+
+chart_co2.legend = new am4charts.Legend();
+
+chart_co2.events.on("datavalidated", function () {
+    dateAxis_co2.zoom({start:0.8, end:1});
+});
+
+chart_co2.events.on("ready", function () {
+//chart_humevents.on("rendered", function () {
+  dateAxis_co2.zoomToDates(
+    Date.parse('2019-05-01 00:00:00'),
+    Date.parse('2019-05-07 15:53:38')
+  );
+});
+
+
+function generateChartData() {
+    var chartData = [];
+    // current date
+    var firstDate = new Date();
+    // now set 500 minutes back
+    firstDate.setMinutes(firstDate.getDate() - 500);
+
+    // and generate 500 data items
+    var visits = 500;
+    for (var i = 0; i < 500; i++) {
+        var newDate = new Date(firstDate);
+        // each time we add one minute
+        newDate.setMinutes(newDate.getMinutes() + i);
+        // some random number
+        visits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
+        // add data item to the array
+        chartData.push({
+            date: newDate,
+            value: visits
+        });
+    }
+    return chartData;
+}
+</script>
+
+<div class="topbar" width="100%">
+<table width="100%">
+<tr>
+<td><font size="5"><b>Farm Play</b></font><br><font size="2"> [binstar13@gmail.com]</font></td>
+<td><a href="javascript:gauth_logout();"><img src="./img/logout_g_w.png" width="100" border="0" style="float:right;vertical-align:middle;display:inline-block;"></a></td>
+</tr>
+</table>
+</div>
+
+<div class="navbar" width="100%">
+	<div align="center">
+		  <a href="view_list.php?gauth=true&em=binstar13@gmail.com&cc=0"><img src="./img/main_n.png" width="20"><br>메인</a>
+  	</div>
+	<div align="center">
+		  <a href="view_grp.php?gauth=true&em=binstar13@gmail.com" class="active"><img src="./img/graph_a.png" width="20"><br>그래프</a>
+	</div>
+	<div align="center"  onclick="javascript:alert('다음 버전에 추가 예정');">
+		  <a href="#news"><img src="./img/set_n.png" width="20"><br>설정</a>
+	</div>
+</div>
+
+</body>
+</html>

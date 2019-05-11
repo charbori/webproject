@@ -1,0 +1,93 @@
+
+var dateAxis_temp = chart.xAxes.push(new am4charts.DateAxis());
+dateAxis_temp.baseInterval = {
+  "timeUnit": "minute",
+  "count": 1
+};
+dateAxis_temp.dateFormats.setKey("day", "MMMM dt");
+dateAxis_temp.tooltipDateFormat = "yyyy-MM-dd HH:mm";
+
+
+//dateAxis_temp.tooltipText = "{dateX.formatDate('yyyy-MM-dd')}: {valueY.formatNumber('#.0')}";
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.tooltip.disabled = true;
+valueAxis.title.text = "온도 (°C)";
+valueAxis.renderer.minGridDistance = 20; //
+
+var series01 = chart.series.push(new am4charts.LineSeries());
+series01.dataFields.dateX = "date";
+series01.dataFields.valueY = "value";
+series01.tooltipText = "온도: [bold]{valueY}°C[/]";
+//series01.tooltipText = "온도: [bold]{valueY}[/]";
+series01.fillOpacity = 0.3;
+series01.tensionX = 0.97;
+
+series01.stroke = am4core.color("red").lighten(0.5); series01.fill = am4core.color("red").lighten(0.5);
+
+//series01.stacked = true;
+
+var durationAxis = chart.yAxes.push(new am4charts.ValueAxis());
+durationAxis.title.text = "습도 (%)";
+//durationAxis.baseUnit = "minute";
+durationAxis.renderer.grid.template.disabled = true;
+durationAxis.renderer.opposite = true;
+durationAxis.renderer.minGridDistance = 20;
+
+
+
+// static
+series01.legendSettings.labelText = "온도";
+
+var series02 = chart.series.push(new am4charts.LineSeries());
+series02.dataFields.dateX = "date";
+series02.dataFields.valueY = "value2";
+series02.yAxis = durationAxis;
+series02.tooltipText = "습도: [bold]{valueY}%[/]";
+//series01.tooltipText = "온도: [bold]{valueY}[/]";
+series02.fillOpacity = 0.3;
+series02.tensionX = 0.97;
+
+
+//series02.stacked = true;
+
+// static
+series02.legendSettings.labelText = "습도";
+
+
+var bullet = series01.bullets.push(new am4charts.CircleBullet());
+bullet.circle.fill = am4core.color("#fff");
+bullet.circle.strokeWidth = 1;
+
+bullet = series02.bullets.push(new am4charts.CircleBullet());
+bullet.circle.fill = am4core.color("#fff");
+bullet.circle.strokeWidth = 1;
+
+
+//series01.tooltipText = "{dateX.formatDate('yyyy-MM-dd')}: {valueY.formatNumber('#.0')}";
+
+//chart.cursor = new am4charts.XYCursor();
+//chart.cursor.lineY.opacity = 0;
+//chart.scrollbarX = new am4charts.XYChartScrollbar();
+//chart.scrollbarX.series.push(series01);
+
+// Add cursor
+chart.cursor = new am4charts.XYCursor();
+chart.cursor.xAxis = dateAxis_temp;
+chart.scrollbarX = new am4core.Scrollbar();
+
+// add legend
+chart.legend = new am4charts.Legend();
+
+
+chart.events.on("datavalidated", function () {
+    dateAxis_temp.zoom({start:0.8, end:1});
+});
+
+chart.events.on("ready", function () {
+//chart.events.on("rendered", function () {
+  dateAxis_temp.zoomToDates(
+    Date.parse('2019-05-01 00:00:00'),
+    Date.parse('2019-05-08 09:15:39')
+  );
+});

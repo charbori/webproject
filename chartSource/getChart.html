@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<title>Chart</title>
+	<script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+</head>
+<body>
+	<div id="main" style="width: 600px; height: 400px;"></div>
+	<style>
+		.main{
+			width:90%;
+			margin-left:5%;
+			margin-right:5%;
+			margin-top:5%;
+			margin-bottom:20px;
+		}
+	</style>
+	<script>
+		var co2Data= new Array();
+		var vocsData=new Array();
+		var xAxisData= new Array();
+
+		/*var dayTime = 3600*1000*24;
+
+		var date = +echarts.number.parseDate(Date.now());
+		var end = +echarts.number.parseDate(Date.now() + 3600*1000*24*10);
+
+		document.write(date);
+		document.write("  "+end);
+
+
+		for(var time = date; time < end; time +=dayTime){
+			xAxisData = date;
+			document.write(xAxisData);
+			co2Data.push(Math.round(Math.random() * 2 - 1));
+			vocsData.push(Math.round(Math.random() * 2 - 1));
+		}*/
+
+		var myChart = echarts.init(document.getElementById('main'));
+		var option = {
+
+			legend: {
+				data: [{
+					name:'CO2',
+					icon:'./web_app/web_files/co2_.png',
+					textStyle:{
+						fontWeight:'bold',
+						color:'#AED581'
+					}
+				},
+				{
+					name:'VoCs',
+					icon:'./web_app/web_files/vocs_.png',
+					textStyle:{
+						fontWeight:'bold',
+						color:'#BA68C8'
+					}
+				}
+				],
+				label:{
+					backgroundColor: '#2E64FE'
+				},
+				x:'center',
+				y:'bottom'
+			},
+
+			tooltip: {
+				backgroundColor: '#0091EA',
+				textStyle:{
+					color: '#000000'
+				},
+				trigger: 'axis',
+				axisPointer:{
+					type: 'cross',
+					label:{
+						backgroundColor: '#000000'
+					}
+				}
+			},
+			toolbox: {
+				show : true,
+				feature : {
+					mark : {show:true},
+					dataView : {show: true, readOnly:false},
+					restore : {show: true},
+					savedAsImage : {show: true}
+				},
+				x:'left',
+				y:'bottom'
+				//bottom:true
+			},
+			//calculable : true,
+			xAxis : [
+			{
+				type:'category',
+				//boundaryGap:[3600*1000*4,3600*1000*4],
+				data : [
+				<!--#g_xAxis_data-->
+				'2009/6/12 2:00', '2009/6/12 3:00', '2009/6/12 4:00', '2009/6/12 5:00', '2009/6/12 6:00', '2009/6/12 7:00', '2009/6/12 8:00', '2009/6/12 9:00', '2009/6/12 10:00', '2009/6/12 11:00'
+				<!--#g_xAxis_data#-->
+				]
+			}
+			],
+			yAxis :[
+			{
+				type : 'value',
+				scale:true,
+				name:'CO2 (ppm)',
+				max:1,
+				min:-1,
+				boundaryGap:[0.2,0.2]
+			},
+			{
+				type : 'value',
+				scale: true,
+				name:'VoCs (ppb)',
+				max:1,
+				min:-1,
+				boundaryGap:[0.2,0.2]
+			}
+			],
+			series : [
+			{
+				name:'CO2',	
+				type:'line',
+				itemStyle: 
+				{
+					normal: 
+					{
+						areaStyle: 
+						{
+							color:'#AED581'
+						//type: 'default'
+					},
+					lineStyle:
+					{
+						color:'#689F38'
+					}
+				}
+			},
+			data:co2Data,
+			smooth:true
+		},
+		{
+			name:'VoCs',
+			type:'line',
+			itemStyle: {normal: {areaStyle: {
+				color:'#BA68C8'
+					//type: 'default'
+				},
+				lineStyle:{
+					color:'#9C27B0'
+				}
+			}
+		},
+		data:vocsData,
+		smooth:true
+	}
+	],
+
+	dataZoom:[{
+		show: true,
+		realtime:true,
+		start:0,
+		end:100,
+		y:'top'
+	},
+	{
+		type: 'inside',
+		realtime:true,
+		start:60,
+		end: 100,
+		y:'top'
+	}
+	]
+};
+myChart.setOption(option);				
+/*
+		setInterval(()=>{
+			myChart.setOption({
+				legend:{
+					selected:{
+						'CO2': false,
+						'VoCs': false
+					}
+				}
+			})
+
+			myChart.setOption({
+				legend: {
+					selected: {
+						'出口': true,
+						'入口': true
+					}
+				}
+			})
+		}, 10000)*/
+	</script>
+</body>
+</html>
